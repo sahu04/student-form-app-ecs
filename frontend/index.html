@@ -11,7 +11,6 @@
       margin: 0;
       padding: 0;
     }
-
     .container {
       width: 650px;
       margin: 40px auto;
@@ -20,96 +19,54 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    h2 {
-      text-align: center;
-      color: #2c3e50;
-    }
-
-    label {
-      font-weight: bold;
-    }
-
+    h2 { text-align: center; }
+    label { font-weight: bold; }
     input {
       width: 100%;
       padding: 8px;
       margin: 6px 0 15px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
     }
-
     button {
       padding: 10px 14px;
       border: none;
-      border-radius: 4px;
       cursor: pointer;
-      font-size: 14px;
-    }
-
-    .save-btn {
-      background-color: #27ae60;
       color: white;
     }
-
-    .view-btn {
-      background-color: #2980b9;
-      color: white;
-      margin-left: 10px;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    #msg {
-      margin-top: 10px;
-      font-weight: bold;
-      color: green;
-    }
-
+    .save-btn { background: #27ae60; }
+    .view-btn { background: #2980b9; margin-left: 10px; }
     table {
       width: 100%;
-      margin-top: 25px;
+      margin-top: 20px;
       border-collapse: collapse;
     }
-
-    table, th, td {
-      border: 1px solid #ddd;
-    }
-
-    th {
-      background-color: #34495e;
-      color: white;
-      padding: 10px;
-    }
-
-    td {
+    th, td {
+      border: 1px solid #ccc;
       padding: 8px;
       text-align: center;
     }
+    th { background: #34495e; color: white; }
   </style>
 </head>
 
 <body>
-
 <div class="container">
   <h2>Student Registration Form</h2>
 
   <form onsubmit="saveStudent(event)">
     <label>Student ID</label>
-    <input type="text" id="studentId" required>
+    <input id="studentId" required>
 
     <label>Name</label>
-    <input type="text" id="name" required>
+    <input id="name" required>
 
     <label>Age</label>
-    <input type="number" id="age" required>
+    <input id="age" type="number" required>
 
     <label>Class</label>
-    <input type="text" id="className" required>
+    <input id="className" required>
 
-    <button type="submit" class="save-btn">Save Student</button>
-    <button type="button" class="view-btn" onclick="loadStudents()">View All Students</button>
+    <button class="save-btn">Save</button>
+    <button type="button" class="view-btn" onclick="loadStudents()">View</button>
   </form>
 
   <p id="msg"></p>
@@ -117,10 +74,7 @@
   <table id="studentTable" style="display:none;">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Class</th>
+        <th>ID</th><th>Name</th><th>Age</th><th>Class</th>
       </tr>
     </thead>
     <tbody id="tableBody"></tbody>
@@ -145,8 +99,7 @@ function saveStudent(e) {
   .then(d => {
     msg.innerText = d.message;
     loadStudents();
-  })
-  .catch(() => msg.innerText = "Error saving student");
+  });
 }
 
 function loadStudents() {
@@ -155,7 +108,6 @@ function loadStudents() {
     .then(data => {
       tableBody.innerHTML = "";
       studentTable.style.display = "table";
-
       data.forEach(s => {
         tableBody.innerHTML += `
           <tr>
@@ -163,13 +115,10 @@ function loadStudents() {
             <td>${s.name}</td>
             <td>${s.age}</td>
             <td>${s.class}</td>
-          </tr>
-        `;
+          </tr>`;
       });
-    })
-    .catch(() => msg.innerText = "Error loading students");
+    });
 }
 </script>
-
 </body>
 </html>
